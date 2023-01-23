@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [View on Netlify](mateo_react_challenge.netlify.app)
+- Live Site URL: [View on Netlify](mateoreactchallenge.netlify.app)
 
 ### Built with
 
