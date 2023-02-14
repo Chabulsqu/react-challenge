@@ -2,7 +2,7 @@ import React, {useState } from "react";
 import { AppointmentForm } from '../../components/appointmentForm/AppointmentForm';
 import { TileList } from '../../components/tileList/TileList';
 
-export const AppointmentsPage = ({ appointments, contacts, handleAppointments }) => {
+export const AppointmentsPage = ({ appointments, contacts, handleAppointments, deleteData }) => {
   const [ title, setTitle ] = useState(sessionStorage.getItem('title') ? sessionStorage.getItem('title') : '');
   const [contact, setContact ] = useState('');
   const [ date, setDate ] = useState(sessionStorage.getItem('date') ? sessionStorage.getItem('date') : '');
@@ -11,12 +11,12 @@ export const AppointmentsPage = ({ appointments, contacts, handleAppointments })
   const handleSubmit = (e) => {
     e.preventDefault();
     handleAppointments(title, contact, date, time);
-    sessionStorage.removeItem('title');
+    window.sessionStorage.removeItem('title');
     setTitle('');
     setContact(''); // Not implemented with SessionStorage because it would probably confuse the user and be harder to implement with the defaultValue attribute on the <select>
-    sessionStorage.removeItem('date');
+    window.sessionStorage.removeItem('date');
     setDate('');
-    sessionStorage.removeItem('time');
+    window.sessionStorage.removeItem('time');
     setTime('');
   };
 
@@ -29,7 +29,7 @@ export const AppointmentsPage = ({ appointments, contacts, handleAppointments })
       <hr />
       <section>
         <h2>Appointments</h2>
-        <TileList arr={appointments} />
+        <TileList arr={appointments} deleteData={deleteData} />
       </section>
     </div>
   );

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { ContactForm } from '../../components/contactForm/ContactForm';
 import { TileList } from '../../components/tileList/TileList';
 
-export const ContactsPage = ({ contacts, handleContacts }) => {
-  const [ name, setName ] = useState(sessionStorage.getItem('name') ? sessionStorage.getItem('name') : '');
-  const [ phone , setPhone ] = useState(sessionStorage.getItem('phone') ? sessionStorage.getItem('phone') : '');
-  const [ email , setEmail ] = useState(sessionStorage.getItem('email') ? sessionStorage.getItem('email') : '');
+export const ContactsPage = ({ contacts, handleContacts, deleteData }) => {
+  const [ name, setName ] = useState(window.sessionStorage.getItem('name') ? sessionStorage.getItem('name') : '');
+  const [ phone , setPhone ] = useState(window.sessionStorage.getItem('phone') ? sessionStorage.getItem('phone') : '');
+  const [ email , setEmail ] = useState(window.sessionStorage.getItem('email') ? sessionStorage.getItem('email') : '');
   const [ duplicate, setDuplicate ] = useState(false);
 
   const handleSubmit = (e) => {
@@ -14,13 +14,15 @@ export const ContactsPage = ({ contacts, handleContacts }) => {
     Add contact info and clear data
     if the contact name is not a duplicate
     */
-   if (!duplicate) {
+   if (!duplicate && name[0] !== ' ') {
      handleContacts(name, phone, email);
      setName('');
      setPhone('');
      setEmail('');
-    } else { 
+    } else if (duplicate) { 
       alert('Contact already created');
+     } else {
+      alert("Contact can't contain whitespace at the beginning of its name")
      }
   };
 
@@ -41,7 +43,7 @@ export const ContactsPage = ({ contacts, handleContacts }) => {
       <hr />
       <section>
         <h2>Contacts</h2>
-        <TileList arr={contacts} />
+        <TileList arr={contacts} deleteData={deleteData} />
       </section>
     </div>
   );

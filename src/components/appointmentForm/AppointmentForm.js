@@ -28,20 +28,28 @@ export const AppointmentForm = ({
       <label>
         <input value={title} onChange={({ target }) => {
           setTitle(target.value);
-          sessionStorage.setItem('title', target.value)
-        }} required />
+          window.sessionStorage.setItem('title', target.value)
+        }} 
+        placeholder="Please enter the title for your appointment" 
+        required />
       </label>
       <label>
         <input value={date} onChange={({ target })=> {
           setDate(target.value);
-          sessionStorage.setItem('date', target.value)
-        }} type="date" min={getTodayString()} required />
+          window.sessionStorage.setItem('date', target.value)
+        }} min={getTodayString()} 
+        placeholder="Please enter the date for your appointment" 
+        onFocus={({ target }) => target.type = 'date'}
+        required />
       </label>
       <label>
         <input value={time} onChange={({ target }) => {
           setTime(target.value);
-          sessionStorage.setItem('time', target.value);
-          }} type="time" required />
+          window.sessionStorage.setItem('time', target.value);
+          }}
+          placeholder="Please enter the time for your appointment" 
+          onFocus={({ target }) => target.type = 'time'}
+          required />
       </label>
       <ContactPicker contacts={contacts} handleChange={handleChange} />
       <input type="submit" value="Add Appointment" />
